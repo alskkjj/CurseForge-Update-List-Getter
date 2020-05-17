@@ -95,7 +95,7 @@ class UpgradableFecth(parser.HTMLParser):
         res = self.__results_dict
         self.__results_dict = {}
         return res
-        
+
 __curse_upgradable_fecth_dict = UpgradableFecth()
 
 # html -> name, url
@@ -142,10 +142,11 @@ class CurseForgeUpdateApp(App):
     def __init__(self,
         querys: IQuerys,
         _filter: IFilter,
-        labelIds=['UNREAD', 'INBOX', 'CATEGORY_UPDATES'],
+        labelIds=None,
         maxPrePage=10,
         maxPages=None):
-
+        if labelIds == None:
+            raise RuntimeError('The Parameter labelIds should not be None, but list with zero elements are accepted')
         super(CurseForgeUpdateApp, self).__init__(querys, _filter, labelIds, maxPrePage, maxPages)
 
     def process_html(self, html)->dict:

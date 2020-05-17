@@ -45,6 +45,7 @@ def service_mk():
     return service
 
 
+googleMailLablesIds = ['UNREAD', 'INBOX', 'CATEGORY_UPDATES']
 class GmailQuerys(IQuerys.IQuerys):
     def __init__(self, service):
         self.__service = service
