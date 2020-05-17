@@ -4,10 +4,10 @@ import IFilter
 import eMailUtils
 
 class App:
-    def __init__(self, 
-                 querys: IQuerys, 
+    def __init__(self,
+                 querys: IQuerys,
                  _filter: IFilter,
-                 labelIds: list, 
+                 labelIds: list,
                  maxPrePage: int,
                  maxPages: int
                  ):
@@ -17,19 +17,25 @@ class App:
         self.__maxPrePage = maxPrePage
         self.__maxPages = maxPages
         self.__res = {}
-    
+
     @property
     def res(self):
         return self.__res
 
     def process_html(self, html) -> dict:
+        """
+        process html and return results(as dict),
+        like { 'abc' : 'www.xyz.com/files/abc' }
+        html parser writen in curse_forge.py
+        see curse_forge.CurseForgeUpdateApp
+        """
         pass
 
     def process(self):
         handler = self.__querys.init_a_query(self.__labelIds, self.__maxPrePage
                                              ,maxPages=self.__maxPages)
-        r = True 
-        while r: 
+        r = True
+        while r:
             r = self.__querys.next(handler)
             if r: mailobj = eMailUtils.get_email_object(r)
             if self.__filter.filter(mailobj):
@@ -39,4 +45,4 @@ class App:
                     if dt:
                         self.__res = {**self.__res, **dt} # override old res if same key
 
-        self.__querys.end(handler)           
+        self.__querys.end(handler)

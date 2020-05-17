@@ -1,6 +1,9 @@
 Result_list.json
 credentials.json
 token.pickle
+Test_Mail.js
+test_forder1_raw/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
