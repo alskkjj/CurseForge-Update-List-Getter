@@ -72,7 +72,7 @@ class IQuerys:
     def get_message_by_Id(self, messageId) -> str:
         """
         messageId can arbirarily be anything what maps to a mail
-        return a string, which are python email module can parse
+        return a string, which are python email module (email.parser.BytesParser) can parse
         """
         pass
 

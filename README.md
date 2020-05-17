@@ -1,12 +1,18 @@
 # CurseForge-Update-List-Getter
-Get update list from curse forge update mail which you subscribed by Google Mail.  
 
-to use google mail api, follow the guide line below.
+Get update list from curse forge update mails which you have subscribed by Google Mail.  
+
+To use google mail api, follow the guideline below.
 
 **[Gmial API QuickStart](https://developers.google.com/gmail/api/quickstart/python)**
 
-place the __*credentials.json*__ file at root directory  
+Place the __*credentials.json*__ file at root directory  
 
-to use it  
+To use it  
 
 >`python3 main.py`
+
+To extend it to other email servers:
+
+Implement your own IQuerys, and make a main to install it
+Reimplement IFilter can filter other mails, also remember install it
