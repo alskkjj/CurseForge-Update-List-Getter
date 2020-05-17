@@ -51,7 +51,7 @@ class IQuerys:
         """
         read a page from wherever and report it as a list and next page token
         the parameters of labelsIds, maxPrePage are not severely stricted,
-        they are from gmail api, and direct us to a intuitive way to get mail ids via pages,
+        they are from gmail api, and direct us to a intuitive view to get mail ids via pages,
 
         read Stick assertion code below, it's input can be any objects
 
