@@ -2,6 +2,11 @@
 
 Get update list from curse forge update mails which you have subscribed by Google Mail.  
 
+The update mails must be UNREAD(in UNREAD label, if gmail)
+
+>Results list when get list successfully:
+>![image](result_sample.png)
+
 To use google mail api, follow the guideline below.
 
 **[Gmial API QuickStart](https://developers.google.com/gmail/api/quickstart/python)**

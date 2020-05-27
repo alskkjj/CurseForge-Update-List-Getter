@@ -98,10 +98,19 @@ class UpgradableFecth(parser.HTMLParser):
 
 __curse_upgradable_fecth_dict = UpgradableFecth()
 
+__strange_count = 1
 # html -> name, url
 def extract_update_items(html: str) -> dict:
     __curse_upgradable_fecth_dict.feed(html)
     tmp = __curse_upgradable_fecth_dict.fetch()
+
+    global __strange_count
+    if not tmp:
+        with open('strange_mail_passed_filter'+ str(__strange_count) +'.html', 'w') as fd:
+            fd.write(html)
+
+        __strange_count += 1
+        return None
 
     res = {}
     for k, v in tmp.items():
@@ -130,8 +139,8 @@ import eMailUtils
 class UpgradableMailsFilter(IFilter):
     def filter(self, mail)->bool:
         subject = eMailUtils.get_mail_subject(mail)
-        string = eMailUtils.get_html_payloads(mail)
-        res = is_curse_forge_update(subject, string)
+        strings = eMailUtils.get_html_payloads(mail)
+        res = is_curse_forge_update(subject, strings)
         return res
 
 import IQuerys

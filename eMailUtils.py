@@ -11,7 +11,7 @@ def is_mail_addr(addr):
         return False
 
     return re.match(__mail_address_pattern, addr)
-    
+
 def mail_addr_hostname(addr):
     if not is_mail_addr(addr): raise RuntimeError('mail address is not correct')
     return addr.split('@')[1]
@@ -19,7 +19,7 @@ def mail_addr_hostname(addr):
 def mail_addr_name(addr):
     if not is_mail_addr(addr): raise RuntimeError('mail address is not correct')
     return addr.split('@')[0]
- 
+
 __bytes_parser = BytesParser()
 
 def get_mail_subject(mail):
@@ -35,14 +35,15 @@ def get_payloads(mail):
     return mail.get_payload()
 
 def get_html_payloads(mail):
+
+    if not mail.is_multipart() and mail.get_content_type().count('html') > 0:
+        return [ mail.get_payload(decode=True).decode('UTF-8') ]
+
     lst = []
     pl = mail.get_payload()
-    if isinstance(pl, str):
-        return [ pl ] 
-
     for i in pl:
-        if i.get_content_type().count('html') > 0:
-            lst.append(i.get_payload()) 
+        if hasattr(i, 'get_content_type') and i.get_content_type().count('html') > 0:
+            lst.append(i.get_payload(decode=True).decode('UTF-8'))
     return lst
 
 def get_plain_payloads(mail):
