@@ -20,4 +20,5 @@ To use it
 To extend it to other email servers:
 
 Implement your own IQuerys, and make a main to install it
+
 Reimplement IFilter can filter other mails, also remember install it

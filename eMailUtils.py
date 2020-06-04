@@ -34,16 +34,31 @@ def get_sender(mail):
 def get_payloads(mail):
     return mail.get_payload()
 
+__unicode_ascii_rep_regex = re.compile(r'\\[uU]([0-9A-Fa-f]{4})')
+
+def __hex_to_chr(s: str):
+    return chr(int(s, 16))
+
+def __unicode_ascii_rep_to_chr(s):
+    A = __unicode_ascii_rep_regex.findall(s)
+    B = __unicode_ascii_rep_regex.split(s)
+    return ''.join((x if x not in A else __hex_to_chr(x) for x in B))
+
 def get_html_payloads(mail):
-
-    if not mail.is_multipart() and mail.get_content_type().count('html') > 0:
-        return [ mail.get_payload(decode=True).decode('UTF-8') ]
-
     lst = []
-    pl = mail.get_payload()
-    for i in pl:
-        if hasattr(i, 'get_content_type') and i.get_content_type().count('html') > 0:
-            lst.append(i.get_payload(decode=True).decode('UTF-8'))
+    if not mail.is_multipart() and mail.get_content_type().count('html') > 0:
+        chset = mail.get_content_charset('UTF-8')
+        s = mail.get_payload(decode=True).decode(chset)
+        # s = __unicode_ascii_rep_to_chr(s)
+        lst = [ s ]
+    else:
+        pl = mail.get_payload()
+        for i in pl:
+            if hasattr(i, 'get_content_type') and i.get_content_type().count('html') > 0:
+                chset = mail.get_content_charset('UTF-8')
+                s = i.get_payload(decode=True).decode(chset)
+                # s = __unicode_ascii_rep_to_chr(s)
+                lst.append(s)
     return lst
 
 def get_plain_payloads(mail):

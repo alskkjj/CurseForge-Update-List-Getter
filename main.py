@@ -22,4 +22,4 @@ res = app.res
 
 import json
 with open('Result_list.json', 'w') as fd:
-    json.dump(res, fd, indent=4)
+    json.dump(res, fd, ensure_ascii=False, indent=4)
