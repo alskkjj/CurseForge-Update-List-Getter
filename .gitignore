@@ -3,6 +3,7 @@ credentials.json
 token.pickle
 Test_Mail.js
 test_forder1_raw/
+token.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
