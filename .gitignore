@@ -4,6 +4,7 @@ token.pickle
 Test_Mail.js
 test_forder1_raw/
 token.json
+strange_mail_passed_filter\d+.html
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
